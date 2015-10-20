@@ -36,7 +36,6 @@ module.exports = {
     var path = this.webfontPath();
     var options = merge(true, {
         css: true,
-        cssDest: 'temp/ember-cli-webfont.css'
       }, this.options());
     var cssTree = webfont(path, options);
 
@@ -50,7 +49,7 @@ module.exports = {
     // the addon or your app.
     var dummyWatchDir = 'vendor/';
     if (!this.isDevelopingAddon()) {
-      dummyWatchDir = 'node_modules/ember-cli-webfont/' + dummyWatchDir;
+      dummyWatchDir = this.options.cssDest;
     }
     return mergeTrees([dummyWatchDir, cssTree], { overwrite: true });
   },
@@ -60,10 +59,5 @@ module.exports = {
     var options = merge(true, { css:false }, this.options());
     var fontTree = webfont(path, options);
     return fontTree;
-  },
-
-  included: function(app) {
-    this._super.included(app);
-    app.import('temp/ember-cli-webfont.css');
   }
 };
