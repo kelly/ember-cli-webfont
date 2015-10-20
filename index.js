@@ -34,24 +34,8 @@ module.exports = {
 
   treeForStyles: function() {
     var path = this.webfontPath();
-    var options = merge(true, {
-        css: true,
-      }, this.options());
-    var cssTree = webfont(path, options);
-
-    cssTree = new Funnel(cssTree, {
-      include: [new RegExp(/\.css$/)]
-    });
-
-    // Nasty way to deal with an error when there is no SVG files in the specified path
-    // We merge with an empty CSS file so there isn't an error when we `app.import`
-    // But I can't find a path which doesn't change dependent on whether you are developing
-    // the addon or your app.
-    var dummyWatchDir = 'vendor/';
-    if (!this.isDevelopingAddon()) {
-      dummyWatchDir = this.options.cssDest;
-    }
-    return mergeTrees([dummyWatchDir, cssTree], { overwrite: true });
+    var cssTree = webfont(path, this.options);
+    return cssTree;
   },
 
   treeForPublic: function() {
