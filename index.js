@@ -32,16 +32,9 @@ module.exports = {
     return path;
   },
 
-  treeForStyles: function() {
-    var path = this.webfontPath();
-    var cssTree = webfont(path, this.options);
-    return cssTree;
-  },
-
   treeForPublic: function() {
     var path = this.webfontPath();
-    var options = merge(true, { css:false }, this.options());
-    var fontTree = webfont(path, options);
+    var fontTree = webfont(path, this.options());
     return fontTree;
   }
 };
